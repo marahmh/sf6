@@ -1,0 +1,153 @@
+{% extends 'base_front.html.twig' %}
+
+
+{% block body %}
+    <h1>test</h1>
+    <div style="margin-bottom: 100px"></div>
+    <link rel="stylesheet" href="{{ asset('frontOffice/assets/css/profile.css')}}">
+    <link href="{{asset('frontOffice/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('frontOffice/assets/css/login.css')}}">
+    <div class="container">
+        <div class="main-body">
+
+            <!-- Breadcrumb -->
+            {#            <nav aria-label="breadcrumb" class="main-breadcrumb">#}
+            {#                <ol class="breadcrumb">#}
+            {#                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>#}
+            {#                    <li class="breadcrumb-item"><a href="javascript:void(0)">User</a></li>#}
+            {#                    <li class="breadcrumb-item active" aria-current="page">User Profile</li>#}
+            {#                </ol>#}
+            {#            </nav>#}
+            <!-- /Breadcrumb -->
+
+            <div class="row gutters-sm">
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+
+                            {{ form_start(form,{attr:{novalidate:'novalidate'}}) }}
+                            <div class="d-flex flex-column align-items-center text-center">
+{#                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">#}
+                                <img src="{{ asset("/uploads/"~ utilisateur.photoUtilisateur ) }}" alt="Admin" class="rounded-circle" width="200">
+                                <div class="mt-3">
+                                    <h4>{{ utilisateur.nomUtilisateur }}</h4>
+                                    <p class="text-secondary mb-1">{{ utilisateur.emailUtilisateur }}</p>
+                                    {{ form_widget(form.photo_utilisateur, { 'attr': {'placeholder': 'Photo de profil','class': 'input100','value':utilisateur.photoUtilisateur} }) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <form method="post">
+                                {% include 'flash_messages.html.twig' %}
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Nom et prénom</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <div class="inputgap">
+                                            {{ form_errors(form.nom_utilisateur, { 'attr': {'class': 'inputgap'} }) }}
+                                        </div>
+                                        {{ form_widget(form.nom_utilisateur, {  'attr': {'placeholder': 'Nom et prénom','class': '','novalidate': 'novalidate' ,'value':utilisateur.nomUtilisateur  } }) }}
+
+                                    </div>
+                                </div>
+                                <div class="row mb-3"></div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Email</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <div class="inputgap">
+                                            {{ form_errors(form.email_login, { 'attr': {'class': 'inputgap'} }) }}
+                                        </div>
+                                        {{ form_widget(form.email_login, {  'attr': {'placeholder': 'Email','class': 'form-control','novalidate': 'novalidate' ,'value':utilisateur.emailUtilisateur  } }) }}
+
+                                    </div>
+                                </div>
+                                <div class="row mb-3"></div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Tel</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <div class="inputgap">
+                                            {{ form_errors(form.numero_utilisateur, { 'attr': {'class': 'inputgap'} }) }}
+                                        </div>
+                                        {{ form_widget(form.numero_utilisateur, {  'attr': {'placeholder': 'Tel','class': 'form-control','novalidate': 'novalidate' ,'value':utilisateur.numeroUtilisateur  } }) }}
+
+                                    </div>
+                                </div>
+                                <div class="row mb-3"></div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Ancien mot de passe</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <div class="inputgap">
+                                            {{ form_errors(form.anc_mdp_login, { 'attr': {'class': 'inputgap'} }) }}
+                                        </div>
+                                        {{ form_widget(form.anc_mdp_login, {  'attr': {'placeholder': 'Ancien mot de passe','class': 'form-control','novalidate': 'novalidate'  } }) }}
+
+                                    </div>
+                                </div>
+{#                                <div class="row mb-3"><button id="lock">lock</button></div>#}
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Nouveau mot de passe</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <div class="inputgap">
+                                            {{ form_errors(form.mdp_login, { 'attr': {'class': 'inputgap'} }) }}
+                                        </div>
+                                        {{ form_widget(form.mdp_login, {  'attr': {'placeholder': 'Nouveau mot de passe','class': 'form-control','novalidate': 'novalidate'  } }) }}
+
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Confirmer mot de passe</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <div class="inputgap">
+                                            {{ form_errors(form.confirme_mot_de_passe, { 'attr': {'class': 'inputgap'} }) }}
+                                        </div>
+                                        {{ form_widget(form.confirme_mot_de_passe, {  'attr': {'placeholder': 'Confirmer mot de passe','class': 'form-control','novalidate': 'novalidate'  } }) }}
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-3"></div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <button class="btn loginButton">{{ button_label|default('Save') }}</button>
+                                    </div>
+                                </div>
+                                {{ form_end(form) }}
+                            </form>
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <script>
+        window.onload=()=> {
+            const lobkBtn = document.querySelector("#lock");
+            const ancmdp=document.getElementById("profile_edit_anc_mdp_login");
+            lobkBtn.addEventListener("click", () => {
+                ancmdp.disabled=true;
+            });
+        }
+    </script>
+{% endblock %}

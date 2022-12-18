@@ -1,0 +1,33 @@
+
+
+{% block body %}
+    <h1>MasionEdition index</h1>
+
+
+            <table class="table table-responsive-md" >
+
+                <thead>
+                <tr>
+
+                    <th>Adresse de MaisonEdition</th>
+                    <th>Photo de MaisonEdition</th>
+                    <th>Description de MaisonEdition</th>
+                    <th>Nom de MaisonEdition</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for masion_edition in masion_editions %}
+                <tr>
+
+                    <td>{{ masion_edition.adresseMaisonEdition }}</td>
+                    <td>{{ masion_edition.photoMaisonEdition }}</td>
+                    <td>{{ masion_edition.descriptionMaisonEdition }}</td>
+                    <td>{{ masion_edition.nomMaisonEdition }}</td>
+
+                </tr>
+
+
+                </tbody {% endfor %}>
+            </table>
+
+{% endblock %}

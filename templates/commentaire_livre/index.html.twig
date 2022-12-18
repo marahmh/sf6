@@ -1,0 +1,37 @@
+{% extends 'base_back.html.twig' %}
+
+{% block title %}CommentaireLivre index{% endblock %}
+
+{% block body %}
+    <h1>CommentaireLivre index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdCommentaire</th>
+                <th>ContenuCommentaire</th>
+                <th>DateCommentaire</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for commentaire_livre in commentaire_livres %}
+            <tr>
+                <td>{{ commentaire_livre.idCommentaire }}</td>
+                <td>{{ commentaire_livre.contenuCommentaire }}</td>
+                <td>{{ commentaire_livre.dateCommentaire ? commentaire_livre.dateCommentaire|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_commentaire_livre_show', {'idCommentaire': commentaire_livre.idCommentaire}) }}">show</a>
+                    <a href="{{ path('app_commentaire_livre_edit', {'idCommentaire': commentaire_livre.idCommentaire}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_commentaire_livre_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,95 @@
+
+
+{% extends 'base_back.html.twig' %}
+
+
+
+
+
+{% block title %}Recomponse index{% endblock %}
+
+{% block body %}
+    <style>
+        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    </style>
+
+    <h1>Recomponse index</h1>
+
+<div class="card-body">
+    <script src="{{ asset('backOffice/js/jquery.min.js') }}"></script>
+    <input type="text" class="form-control" placeholder="Search…" aria-label="Search"id="search">
+    <div class="table-responsive">
+        <table class="table table-responsive-md" id="tableac">
+        <thead>
+            <tr>
+                <th>IdRecomponse</th>
+                <th>PhotoRecomponse</th>
+                <th>NomRecomponse</th>
+                <th>DescriptionRecomponse</th>
+
+                <th>PrixRecomponse</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+           <tbody id="all">
+        {% for recomponse in recomponses %}
+            <tr>
+                <td>{{ recomponse.idRecomponse }}</td>
+                <td><img src ="{{ asset('uploads/' ~ recomponse.photoRecomponse ) }}"  style = "width: 50px ;height: 50px"></td>
+                <td>{{ recomponse.nomRecomponse }}</td>
+                <td>{{ recomponse.descriptionRecomponse }}</td>
+
+                <td>{{ recomponse.prixRecomponse }}</td>
+                <td>
+                    <a href="{{ path('app_recomponse_show', {'idRecomponse': recomponse.idRecomponse}) }}">show</a>
+                    <a href="{{ path('app_recomponse_edit', {'idRecomponse': recomponse.idRecomponse}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+    </div>
+
+    <a href="{{ path('app_recomponse_new') }}">Create new</a>
+
+    {{ render(controller('App\\Controller\\PackJetonController::indexback')) }}
+
+
+
+    {{ render(controller('App\\Controller\\AchatRecomponseController::index')) }}
+    <script>
+        $(document).ready(function(){
+            $('#search').keyup(function(){
+                search_table($(this).val());
+            });
+            function search_table(value){
+                $('#tableac tbody tr').each(function(){
+                    var found = 'false';
+                    $(this).each(function(){
+                        if($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0)
+                        {
+                            found = 'true';
+                        }
+                    });
+                    if(found == 'true')
+                    {
+                        $(this).show();
+
+                    }
+                    else
+                    {
+                        $(this).hide();
+
+                    }
+                });
+            }
+        });
+    </script>
+
+{% endblock %}

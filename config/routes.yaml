@@ -1,0 +1,13 @@
+index:
+  path: /
+  controller: App\Controller\HomeController::index
+
+admin:
+  path: /admin
+  controller: App\Controller\AdminController::index
+
+
+ajax_search:
+  path:     /search
+  controller: App\Controller\RecomponseController::search
+

@@ -1,0 +1,78 @@
+{%  extends 'base_back.html.twig'  %}
+
+{% block title %}MasionEdition index{% endblock %}
+
+{% block body %}
+    <h1>MasionEdition index</h1>
+    <div>
+        <button class="btn"> <a class="nav-link" href="/contrat" > Contrat</a> </button>
+    </div>
+<div class="card-body">
+    <script src="{{ asset('backOffice/js/jquery.min.js') }}"></script>
+    <input type="text" class="form-control" placeholder="Search…" aria-label="Search"id="search">
+    <div class="table-responsive">
+        <table class="table table-responsive-md" id="tableac">
+
+        <thead>
+            <tr>
+                <th>AdresseMaisonEdition</th>
+                <th>PhotoMaisonEdition</th>
+                <th>DescriptionMaisonEdition</th>
+                <th>NomMaisonEdition</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody id="all">
+        {% for masion_edition in masion_editions %}
+            <tr>
+                <td>{{ masion_edition.adresseMaisonEdition }}</td>
+                <td>{{ masion_edition.photoMaisonEdition }}</td>
+                <td>{{ masion_edition.descriptionMaisonEdition }}</td>
+                <td>{{ masion_edition.nomMaisonEdition }}</td>
+                <td>
+                    <a href="{{ path('app_masion_edition_show', {'idMaisonEdition': masion_edition.idMaisonEdition}) }}">show</a>
+                    <a href="{{ path('app_masion_edition_edit', {'idMaisonEdition': masion_edition.idMaisonEdition}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+
+        </tbody {% endfor %}>
+    </table>
+    </div>
+
+    <a href="{{ path('app_masion_edition_new') }}">Create new</a>
+    <a href="{{ path('maison_list') }}">Imprimer</a>
+
+</div>
+    <script>
+        $(document).ready(function(){
+            $('#search').keyup(function(){
+                search_table($(this).val());
+            });
+            function search_table(value){
+                $('#tableac tbody tr').each(function(){
+                    var found = 'false';
+                    $(this).each(function(){
+                        if($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0)
+                        {
+                            found = 'true';
+                        }
+                    });
+                    if(found == 'true')
+                    {
+                        $(this).show();
+
+                    }
+                    else
+                    {
+                        $(this).hide();
+
+                    }
+                });
+            }
+        });
+    </script>
+{% endblock %}

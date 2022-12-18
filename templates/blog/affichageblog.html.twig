@@ -1,0 +1,70 @@
+{% extends 'base_front.html.twig' %}
+{% block body %}
+
+<!-- Page Content -->
+<div class="page-heading about-heading header-text">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="text-content">
+                    <h4>Libro</h4>
+                    <h2>our Blogs</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div class="team-members">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-heading">
+                    {% set s = 0 %}
+                    {% for b in blog %}
+                    {% set s=s+1 %}
+                    {% endfor %}
+                    <h2>Blogs: {{ s }}</h2>
+                </div>
+            </div>
+            {% for b in blog %}
+
+            <div class="col-md-4">
+                <div class="team-member">
+                    <div class="thumb-container">
+
+                        <img  src="{{  asset('/uploads/' ~ b.photoBlog ) }}" alt="" >
+                        <div class="hover-effect">
+                            <div class="hover-content" >
+                                <ul class="social-icons" >
+                                    <li><a href="{{ path('app_likeblog',{'id':b.idBlog}) }}" ><i class="fa fa-thumbs-o-up"></i><h4>{{ b.likeBlog }}</h4></a></li>
+                                    <li><a href="{{ path('app_dislikeblog',{'id':b.idBlog}) }}"><i class="fa fa-thumbs-down"></i><h4>{{ b.dislikeBlog }}</h4></a></li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="down-content">
+                        <a href="{{path('app_detail_blog',{'id':b.idBlog})}}"> <h4>{{ b.titreBlog }} </h4></a>
+
+
+                        <p>{{ b.sujetBlog }}</p>
+
+                    </div>
+                    <a>le {{ b.dateBlog|date('d/m/y ') }}</a>
+
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+

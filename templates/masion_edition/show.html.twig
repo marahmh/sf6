@@ -1,0 +1,37 @@
+{%  extends 'base_back.html.twig'  %}
+{% block title %}MasionEdition{% endblock %}
+
+{% block body %}
+    <h1>MasionEdition</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>IdMaisonEdition</th>
+                <td>{{ masion_edition.idMaisonEdition }}</td>
+            </tr>
+            <tr>
+                <th>AdresseMaisonEdition</th>
+                <td>{{ masion_edition.adresseMaisonEdition }}</td>
+            </tr>
+            <tr>
+                <th>PhotoMaisonEdition</th>
+                <td>{{ masion_edition.photoMaisonEdition }}</td>
+            </tr>
+            <tr>
+                <th>DescriptionMaisonEdition</th>
+                <td>{{ masion_edition.descriptionMaisonEdition }}</td>
+            </tr>
+            <tr>
+                <th>NomMaisonEdition</th>
+                <td>{{ masion_edition.nomMaisonEdition }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_masion_edition_index') }}">back to list</a>
+
+    <a href="{{ path('app_masion_edition_edit', {'idMaisonEdition': masion_edition.idMaisonEdition}) }}">edit</a>
+
+    {{ include('masion_edition/_delete_form.html.twig') }}
+{% endblock %}

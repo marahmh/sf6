@@ -1,0 +1,91 @@
+{% extends 'base_front.html.twig' %}
+{%block body %}
+    <h1>Evenement index</h1>
+    <div style="margin-bottom: 100px"></div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="product-item">
+                {% if evenement.image is not  null %}
+                    <a href="#"><img src={{ asset("/uploads/"~ evenement.image ) }} alt=""></a>
+                {%else %}
+                    <a href="#"><img src={{ asset("frontOffice/assets/images/child-page-placeholder.png") }} alt=""></a>
+                {% endif %}
+                <div class="down-content">
+                    <a href="#"><h4>{{ evenement.titreEvenement }}</h4></a>
+                    <a >{{ evenement.dateEvenement| date("m/d/Y") }}</a>
+                    <a > par {{ evenement.idCreateur.nomUtilisateur }}</a>
+                    <p>{{ evenement.descriptionEvenement }}</p>
+                    {% if  app.user %}
+                        {%if  evenement.estParticipe ==1 %}
+                            <a class="btnEventAccueil">Deja Participant </a>
+                        {% else %}
+                            <a href="{{ path('app_evenement_participer', {'idEvenement': evenement.idEvenement}) }}" class="btnEventAccueil">Participer</a>
+                        {% endif %}
+                    {% endif %}
+                    &nbsp;
+                    <span>Participants ({{ evenement.nbParticipant }})</span>
+                </div>
+            </div>
+        </div>
+        <div  id="map" style= "width:  1500px ;height: 500px">
+
+        </div>
+    </div>
+
+
+
+
+{% endblock %}
+ {% block javascript %}
+ <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBouHoRUF8Z3qv6xNAheHDFW2QQJHBx-Qs&callback=initialize"  defer>  </script>
+ <script type="text/javascript">
+
+     function initialize() {
+
+         var mapOptions, map, marker
+         element = document.getElementById('map');
+
+
+         mapOptions = {
+             // How far the maps zooms in.
+             zoom: 13,
+             // Current Lat and Long position of the pin/
+             center: new google.maps.LatLng( {{ evenement.latitude|json_encode() }},{{ evenement.longitude|json_encode() }} ),
+             // center : {
+             // 	lat: -34.397,
+             // 	lng: 150.644
+             // },
+             disableDefaultUI: false, // Disables the controls like zoom control on the map if set to true
+             scrollWheel: true, // If set to false disables the scrolling on the map.
+             draggable: false, // If set to false , you cannot move the map around.
+             // mapTypeId: google.maps.MapTypeId.HYBRID, // If set to HYBRID its between sat and ROADMAP, Can be set to SATELLITE as well.
+             // maxZoom: 11, // Wont allow you to zoom more than this
+             // minZoom: 9  // Wont allow you to go more up.
+
+         };
+
+         /**
+          * Creates the map using google function google.maps.Map() by passing the id of canvas and
+          * mapOptions object that we just created above as its parameters.
+          *
+          */
+         // Create an object map with the constructor function Map()
+         map = new google.maps.Map(element, mapOptions); // Till this like of code it loads up the map.
+
+         /**
+          * Creates the marker on the map
+          *
+          */
+         marker = new google.maps.Marker({
+             position: mapOptions.center,
+             map: map,
+             // icon: 'http://pngimages.net/sites/default/files/google-maps-png-image-70164.png',
+             draggable: true
+         });
+
+
+
+     }
+ </script>
+
+{% endblock %}

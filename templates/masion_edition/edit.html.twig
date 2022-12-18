@@ -1,0 +1,12 @@
+{%  extends 'base_back.html.twig'  %}
+{% block title %}Edit MasionEdition{% endblock %}
+
+{% block body %}
+    <h1>Edit MasionEdition</h1>
+
+    {{ include('masion_edition/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_masion_edition_index') }}">back to list</a>
+
+    {{ include('masion_edition/_delete_form.html.twig') }}
+{% endblock %}

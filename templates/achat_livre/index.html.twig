@@ -1,0 +1,35 @@
+{% extends 'base_back.html.twig' %}
+
+{% block title %}AchatLivre index{% endblock %}
+
+{% block body %}
+    <h1>AchatLivre index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>DateAchat</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for achat_livre in achat_livres %}
+            <tr>
+                <td>{{ achat_livre.id }}</td>
+                <td>{{ achat_livre.dateAchat ? achat_livre.dateAchat|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_achat_livre_show', {'id': achat_livre.id}) }}">show</a>
+                    <a href="{{ path('app_achat_livre_edit', {'id': achat_livre.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_achat_livre_new') }}">Create new</a>
+{% endblock %}

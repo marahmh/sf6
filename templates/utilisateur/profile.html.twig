@@ -1,0 +1,119 @@
+{% extends 'base_front.html.twig' %}
+
+
+{% block body %}
+    <h1>test</h1>
+    <div style="margin-bottom: 100px"></div>
+    <link rel="stylesheet" href="{{ asset('frontOffice/assets/css/profile.css')}}">
+    <link href="{{asset('frontOffice/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('frontOffice/assets/css/login.css')}}">
+    <div class="container">
+        <div class="main-body">
+
+            <!-- Breadcrumb -->
+{#            <nav aria-label="breadcrumb" class="main-breadcrumb">#}
+{#                <ol class="breadcrumb">#}
+{#                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>#}
+{#                    <li class="breadcrumb-item"><a href="javascript:void(0)">User</a></li>#}
+{#                    <li class="breadcrumb-item active" aria-current="page">User Profile</li>#}
+{#                </ol>#}
+{#            </nav>#}
+            <!-- /Breadcrumb -->
+
+            <div class="row gutters-sm">
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex flex-column align-items-center text-center">
+{#                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">#}
+                                <img src="{{ asset("/uploads/"~ utilisateur.photoUtilisateur ) }}" alt="Admin" class="rounded-circle" width="200">
+
+                                <div class="mt-3">
+                                    <h4>{{ utilisateur.nomUtilisateur }}</h4>
+                                    <p class="text-secondary mb-1">{{ utilisateur.emailUtilisateur }}</p>
+                                    <p class="text-muted font-size-sm">{{ utilisateur.dateNaissanceUtilisateur ? utilisateur.dateNaissanceUtilisateur|date('Y-m-d') : '' }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-8">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Solde</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{ utilisateur.soldeUtilisateur }}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Email</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{ utilisateur.emailUtilisateur }}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Date de naissance :</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{ utilisateur.dateNaissanceUtilisateur ? utilisateur.dateNaissanceUtilisateur|date('Y-m-d') : '' }}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Tel:</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{ utilisateur.numeroUtilisateur }}
+                                </div>
+                            </div>
+
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <a class="btn loginButton"  href="{{ path('app_editProfile', { 'idUtilisateur': app.user.username }) }}">Modifier</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+            <div class="row gutters-sm">
+                <div class="col-md-12">
+                    <div class="card md-12">
+                        <div class="card-body">
+                            {{ include('evenement/calendrier.html.twig') }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row gutters-sm" style="margin-top: 2%">
+                <div class="col-md-12">
+                    <div class="card md-12">
+                        <div class="card-body">
+                            <div  class="row">
+                            {% include "consulter_livre/card.html.twig" %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RecomponseLivre index{% endblock %}
+
+{% block body %}
+    <h1>RecomponseLivre index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Recomponse</th>
+                <th>Livre</th>
+                <th>Quantite</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for recomponse_livre in recomponse_livres %}
+            <tr>
+                <td>{{ recomponse_livre.idRecomponse.nomRecomponse }}</td>
+                <td>{{ recomponse_livre.idLivre }}</td>
+                <td>{{ recomponse_livre.quantite }}</td>
+                <td>
+                    <a href="{{ path('app_recomponse_livre_show', {'id': recomponse_livre.id}) }}">show</a>
+                    <a href="{{ path('app_recomponse_livre_edit', {'id': recomponse_livre.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_recomponse_livre_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base_front.html.twig' %}
+
+{% block title %}Login index{% endblock %}
+
+{% block body %}
+    <h1>Login index</h1>
+    <div style="margin-bottom: 100px"></div>
+    <button><a href="/utilisateur">Utilisateur</a></button>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>EmailLogin</th>
+                <th>MdpLogin</th>
+                <th>BlockedLogin</th>
+                <th>BlockedMessage</th>
+                <th>BlockedDuree</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for login in logins %}
+            <tr>
+                <td>{{ login.emailLogin }}</td>
+                <td>{{ login.mdpLogin }}</td>
+                <td>{{ login.blockedLogin ? 'Yes' : 'No' }}</td>
+                <td>{{ login.blockedMessage }}</td>
+                <td>{{ login.blockedDuree ? login.blockedDuree|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_login_show', {'idLogin': login.idLogin}) }}">show</a>
+                    <a href="{{ path('app_login_edit', {'idLogin': login.idLogin}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_login_new') }}">Create new</a>
+{% endblock %}

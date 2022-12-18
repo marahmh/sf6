@@ -1,0 +1,38 @@
+
+{% extends 'base_front.html.twig' %}
+{% block body %}
+    <h1>Evenement index</h1>
+    <div style="margin-bottom: 100px"></div>
+    <div class="container">
+
+        <div class="row">
+            <div class="col-4">
+        <input id="titreQuiz" class="form-control" placeholder="Donner le titre du quiz">
+            </div>
+
+            <div class="col-4">
+        <input id="descriptionQuiz" class="form-control" placeholder="Donner la description du quiz">
+        </div>
+        </div>
+
+
+
+        <div class="row">
+    <div id="questionDiv" class="col-4">
+        <input type="text" id="question" class="form-control" placeholder="Donner la question">
+    </div>
+            </div>
+
+    <div id="choixquestion">
+
+    </div>
+
+    <button id="nvChoix" class="btnEventAccueil">Ajouter Une reponse</button>
+    <button id="submit" class="btnEventAccueil">Terminer le quiz</button>
+    <button id="nvQuestion" class="btnEventAccueil">Ajouter une autre question</button>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" ></script>
+    <script src = "{{asset('js/quiz.js')  }}"> </script>
+
+    </div>
+
+{% endblock %}

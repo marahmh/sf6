@@ -1,0 +1,57 @@
+{% extends 'base_back.html.twig' %}
+
+{% block title %}Utilisateur index{% endblock %}
+
+{% block body %}
+
+    <h1>Utilisateur index</h1>
+    <div style="margin-bottom: 100px"></div>
+    <button><a href="/login">Login</a></button>
+    <form method="post">
+        <label>
+            <input type="text" placeholder="Recherche..." name="nomUtilisateur">
+            <input type="submit" value="recherche">
+        </label>
+    </form>
+    {% include 'flash_messages.html.twig' %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdUtilisateur</th>
+                <th>NomUtilisateur</th>
+                <th>DateNaissanceUtilisateur</th>
+                <th>PhotoUtilisateur</th>
+                <th>TypeUtilisateur</th>
+                <th>SoldeUtilisateur</th>
+                <th>EmailUtilisateur</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for utilisateur in utilisateurs %}
+            <tr>
+                <td>{{ utilisateur.idUtilisateur }}</td>
+                <td>{{ utilisateur.nomUtilisateur }}</td>
+                <td>{{ utilisateur.dateNaissanceUtilisateur ? utilisateur.dateNaissanceUtilisateur|date('Y-m-d') : '' }}</td>
+                <td>{{ utilisateur.photoUtilisateur }}</td>
+                <td>{{ utilisateur.typeUtilisateur }}</td>
+                <td>{{ utilisateur.soldeUtilisateur }}</td>
+                <td>{{ utilisateur.emailUtilisateur }}</td>
+                <td>
+                    <a href="{{ path('app_utilisateur_show', {'idUtilisateur': utilisateur.idUtilisateur}) }}">show</a>
+                    <a href="{{ path('app_utilisateur_edit', {'idUtilisateur': utilisateur.idUtilisateur}) }}">edit</a>
+
+                    <a href="{{ path('app_utilisateur_block', {'idUtilisateur': utilisateur.idUtilisateur}) }}">bloquer</a>
+                    <a href="{{ path('app_utilisateur_unblock', {'idUtilisateur': utilisateur.idUtilisateur}) }}">débloquer</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_utilisateur_new') }}">Create new</a>
+{% endblock %}

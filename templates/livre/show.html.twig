@@ -1,0 +1,52 @@
+{% extends 'base_back.html.twig' %}
+
+{% block title %}Livre{% endblock %}
+
+{% block body %}
+    <h1>Livre</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>IdLivre</th>
+                <td>{{ livre.idLivre }}</td>
+            </tr>
+            <tr>
+                <th>TitreLivre</th>
+                <td>{{ livre.titreLivre }}</td>
+            </tr>
+            <tr>
+                <th>DescriptionLivre</th>
+                <td>{{ livre.descriptionLivre }}</td>
+            </tr>
+            <tr>
+                <th>DatePublicationLivre</th>
+                <td>{{ livre.datePublicationLivre ? livre.datePublicationLivre|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>PhotoLivre</th>
+                <td>{{ livre.photoLivre }}</td>
+            </tr>
+            <tr>
+                <th>ContenuLivre</th>
+                <td>{{ livre.contenuLivre }}</td>
+            </tr>
+            <tr>
+                <th>PrixLivre</th>
+                <td>{{ livre.prixLivre }}</td>
+            </tr>
+            <tr>
+                <th>EvalutionLivre</th>
+                <td>{{ livre.evalutionLivre }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_livre_index') }}">back to list</a>
+
+    <a href="{{ path('app_livre_edit', {'idLivre': livre.idLivre}) }}">edit</a>
+
+    <a href="{{ path('livre_data_download', {'idLivre': livre.idLivre}) }}">pdf</a>
+
+    {{ include('livre/_delete_form.html.twig') }}
+{% endblock %}

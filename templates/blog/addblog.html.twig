@@ -1,0 +1,33 @@
+{% extends 'base_back.html.twig' %}
+{% block body %}
+    {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+<div class="form-group">
+    <div class="form-group">
+        <label>{{ form_errors(form.titreBlog) }}</label>
+    <input {{ form_widget(form.titreBlog,{'attr':{
+            'placeholder':'titre','class':'titre'
+        }}) }}
+    </div>
+    <div class="form-group">
+        <label>{{ form_errors(form.sujetBlog) }}</label>
+
+        <input {{ form_widget(form.sujetBlog,{'attr':{
+            'placeholder':'sujet','class':'sujet'
+        }}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_widget(form.photoBlog,{'attr':{
+            'placeholder':'image','class':'photo'
+        }}) }}
+    </div>
+    <div class="form-group">
+        <button class="btn-success">{{ button_label|default('Save') }}</button>
+
+    </div>
+</div>
+
+
+
+{{ form_end(form) }}
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends 'base_front.html.twig' %}
+{% block body %}
+
+    <!-- Page Content -->
+    <div class="page-heading  header-text"><figure><img src="{{ asset('/uploads/' ~ blog.photoBlog ) }}" alt=""></figure>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="text-content">
+                        <h4>{{ blog.titreBlog }}</h4>
+                        <h2></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <div class="team-members">
+        <div class="container">
+                <div class="col-md-12">
+                    <div class="section-heading">
+                        <h2>Commentaires</h2> <a href="#ajout">ajouter commentaire </a>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    {% for c in commentaire %}
+
+                    <div class="team-member">
+
+                        <div class="down-content">
+                            <div class="section-heading">
+                            <h4>{{ c.idUtilisateur.nomUtilisateur }}</h4>
+
+                                <span>{{ c.dateCommentaire|date('d/m/y h:m:s') }}</span>
+                                <a  href="{{ path('updatecomment',{'id':c.idCommentaire}) }}">modifier</a> <a class="alert-danger" href="{{ path('app_delete_comm',{'id':c.idCommentaire}) }}">supprimer</a>
+
+
+                            </div>
+
+                            <p>{{ c.contenuCommentaire }}</p>
+
+                            </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            <!-- Header -->
+            {{ form_start(form) }}
+
+            <div class="form-group" id="ajout" >
+                {{ form_widget(form.contenuCommentaire,{'attr':{
+                    'placeholder':'commentaire','class':'titre'
+                }}) }}
+            </div>
+
+            <div class="form-group">
+                <button class="btn-success">{{ button_label|default('Save') }}</button>
+
+            </div>
+
+
+
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+
+
+
+{% endblock %}
+

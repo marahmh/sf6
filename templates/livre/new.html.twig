@@ -1,0 +1,15 @@
+{% extends 'base_back.html.twig' %}
+
+{% block title %}New Livre{% endblock %}
+
+{% block body %}
+    <h1>Create new Livre</h1>
+
+    {{ form_start(form,{attr:{novalidate:'novalidate'}}) }}
+    {{ form_widget(form) }}
+    {{ form_errors(form,{'attr':{'class':'text-danger'}}) }}
+    <button class="btn" style="width: 80%;margin-left: 10%">{{ button_label|default('Save') }}</button>
+    {{ form_end(form) }}
+
+    <a href="{{ path('app_livre_index') }}">back to list</a>
+{% endblock %}

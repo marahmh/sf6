@@ -1,0 +1,26 @@
+{% extends 'base_back.html.twig' %}
+
+{% block title %}AchatLivre{% endblock %}
+
+{% block body %}
+    <h1>AchatLivre</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ achat_livre.id }}</td>
+            </tr>
+            <tr>
+                <th>DateAchat</th>
+                <td>{{ achat_livre.dateAchat ? achat_livre.dateAchat|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_achat_livre_index') }}">back to list</a>
+
+    <a href="{{ path('app_achat_livre_edit', {'id': achat_livre.id}) }}">edit</a>
+
+    {{ include('achat_livre/_delete_form.html.twig') }}
+{% endblock %}

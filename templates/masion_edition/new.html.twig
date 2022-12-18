@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New MasionEdition{% endblock %}
+
+{% block body %}
+    <h1>Create new MasionEdition</h1>
+
+    {{ include('masion_edition/_form.html.twig') }}
+
+    <a href="{{ path('app_masion_edition_index') }}">back to list</a>
+{% endblock %}

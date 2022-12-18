@@ -1,0 +1,12 @@
+<form method="post" action="{{ path('app_recomponse_delete', {'idRecomponse': recomponse.idRecomponse}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ recomponse.idRecomponse) }}">
+    <button class="btn" onclick="return myFunction()">Delete</button>
+</form>
+<script>
+    function myFunction() {
+        var r = confirm("OK to delete?");
+        if (r == false) {
+            return false;
+        }
+    }
+</script>

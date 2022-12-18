@@ -1,0 +1,34 @@
+{% extends 'base_front.html.twig' %}
+
+   {% block body %}
+<div class="banner header-text">
+    <div class="owl-banner owl-carousel">
+        <div class="banner-item-01">
+            <div class="text-content">
+                <h2>edit your Comment</h2>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Header -->
+    {{ form_start(form) }}
+
+    <div class="form-group">
+        {{ form_widget(form.contenuCommentaire,{'attr':{
+            'placeholder':'commentaire','class':'titre'
+        }}) }}
+    </div>
+
+    <div class="form-group">
+        <button class="btn-success">{{ button_label|default('Save') }}</button>
+
+    </div>
+
+
+
+    {{ form_end(form) }}
+</div>
+    {% endblock %}
+
+

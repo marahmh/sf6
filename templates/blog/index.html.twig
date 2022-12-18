@@ -1,0 +1,46 @@
+{% extends 'base_back.html.twig' %}
+
+{% block title %}Hello BlogController!{% endblock %}
+
+{% block body %}
+
+                        <h4 class="box-title"></h4><a href="{{ path('app_addblog') }}">Ajouter Blog</a>
+
+                        <!-- /.box-title -->
+
+                        <!-- /.dropdown js__dropdown -->
+                        <table id="example" class="table table-striped table-bordered display" style="width:100%">
+                            <thead>
+
+                            <tr>
+                                <th>Titre Blog</th>
+                                <th>Sujet Blog</th>
+                                <th>Likes</th>
+                                <th>Dislikes</th>
+                                <th>Date</th>
+                                <th>Modifier</th>
+                                <th>Supprimer</th>
+                            </tr>
+
+                            </thead>
+
+                            <tbody>
+                            {% for r in blog %}
+                                <tr>
+                                    <td>{{ r.TitreBlog }}</td>
+                                    <td>{{ r.SujetBlog }}</td>
+                                    <td>{{ r.LikeBlog }}</td>
+                                    <td>{{ r.DislikeBlog }}</td>
+                                    <td>{{ r.dateBlog|date('d/m/y h:m:s') }}</td>
+                                    <td><a href="{{ path ('app_modifierblog',{'id':r.idBlog}) }}">Modifier</a> </td>
+                                    <td><a href="{{ path ('app_supprimerblog',{'id':r.idBlog}) }}">Supprimer</a> </td>
+
+
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+
+            <!-- /.row small-spacing -->
+
+{% endblock %}

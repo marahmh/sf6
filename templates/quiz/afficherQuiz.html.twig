@@ -1,0 +1,47 @@
+{% extends 'base_front.html.twig' %}
+{% block body%}
+    <h1>Evenement index</h1>
+    <div style="margin-bottom: 100px"></div>
+    <div class="container">
+        <div class="card" style="width: 80%;">
+            <div class="card-body">
+                <h5 class="card-title">{{ data.quiz.titre}}</h5>
+                <p class="card-text">{{ data.quiz.description }}</p>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 70px"></div>
+        {%  for question in data.questions %}
+            <div class="card" style="width: 80%;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ question.question.titre }}</h5>
+                    {% for c in question.choix %}
+
+                            <div class="row">
+                                <div class="col-4">
+                            <input type="checkbox" class="form-control" id={{c.id}}>
+                                </div>
+                                <div class="col-4">
+                            <label class="form-check-label" for={{ c.id }}>
+                                {{c.text}}
+                            </label>
+                                </div>
+                            </div>
+                        <div style="margin-bottom: 20px"> </div>
+
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div style="margin-bottom: 40px"> </div>
+        {% endfor %}
+
+    </div>
+
+
+{% endblock %}
+{% block javascript %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" ></script>
+<script src = "{{asset('js/afficheQuiz.js')  }}"> </script>
+
+{% endblock %}

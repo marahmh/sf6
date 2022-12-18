@@ -1,0 +1,162 @@
+{% extends 'base_front.html.twig' %}
+{% block title %}livre index{% endblock %}
+
+{% block body %}
+    <h1>Livre index</h1>
+    <div style="margin-bottom: 100px"></div>
+    <div class="container">
+        <style>
+            .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+            .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+        </style>
+
+        <div class="row">
+
+            <div class="col-4">
+                <a href="#"><img src={{ asset('uploads/livre/'~livre.photoLivre) }} alt="" style="width: 80%;height: 100%"></a>
+             </div>
+            <div class="col-6">
+                <div class="down-content">
+                    {% include 'flash_messages.html.twig' %}
+                    <a><h4 style="margin-bottom: 10%;">{{ livre.titreLivre }}</h4></a styl>
+
+                    <p>{{livre.descriptionLivre}}</p>
+
+                    <span>Prix : {{ livre.prixLivre }}</span>
+                    {% if  app.user %}
+                    {% if livre.prixLivre!=0 and confirmationAchat==false  %}
+
+
+                        <div class="row">
+                            <a href="{{ path('app_livre_acheter', {'idLivre': livre.idLivre}) }}" class="">Acheter <h6></h6></a>
+
+                        </div>
+
+                    {% endif %}
+                    {% if (livre.prixLivre!=0 and confirmationAchat==true) or livre.prixLivre==0 %}
+                    <div class="row">
+                    <a href="{{ path('app_consulter_livre-pdf', {'idLivre': livre.idLivre}) }}" class="btnEventAccueil">PDF</a>
+                    </div>
+                    {% endif %}
+                    {% endif %}
+
+                    {% if quiz  is not null %}
+                        <div class="row">
+                            <a href="{{ path('app_consulter_livre-pdf', {'idLivre': livre.idLivre}) }}" class="btnEventAccueil">{{ quiz.titre }}</a>
+                        </div>
+                    {% endif %}
+                    {% if is_granted('ROLE_ECRIVAIN') and livre.idEcrivainLivre.idUtilisateur== app.user.username %}
+
+                        <a class="nav-link" href="{{ path('add_quiz', {'idLivre': livre.idLivre}) }}">Ajouter un quizz </a>
+
+                    {% endif %}
+                    </div>
+
+
+
+                </div>
+
+        </div>
+
+            <div class="row  d-flex justify-content-center">
+
+                <div class="col-md-8">
+
+                    <div class="headings d-flex justify-content-between align-items-center mb-3">
+                        <h5>Comments</h5>
+                    </div>
+                    <div class="bg-light p-2">
+{#                        <form name="comment_form" method="post" enctype="multipart/form-data">#}
+                        {% if  app.user %}
+                            {{ form_start(form,{attr:{novalidate:'novalidate'}}) }}
+                            {{ form_widget(form.contenuCommentaire) }}
+
+                            <button class="btn">{{ button_label|default('Save') }}</button>
+
+                            {{ form_end(form) }}
+                        {% endif %}
+{#                            <div id="comment_form">#}
+{#                                <div class="d-flex flex-row align-items-start"><textarea class="form-control ml-1 shadow-none textarea" id="commentaire" name="commentaire"></textarea></div>#}
+{#                                <div class="mt-2 text-right"><button class="btn btn-primary btn-sm shadow-none" type="submit"><a href="{{ path('app_commentaire_livre_new_consulter', {'idLivre': livre.idLivre, 'idUtilisateur':1, }) }}">Post comment</a></button><button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button">Cancel</button></div>#}
+{#                            </div>#}
+{#                        </form>#}
+
+                    </div>
+
+                    {% for comment in comments %}
+
+                        <div class="card p-3">
+
+                            <div class="d-flex justify-content-between align-items-center">
+
+                                <div class="user d-flex flex-row align-items-center">
+                                    <span><small class="font-weight-bold text-primary">{{ comment.idUtilisateur.nomUtilisateur }}</small> <small class="font-weight-bold">{{ comment.contenuCommentaire }}</small></span>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+    </div>
+</div>
+<script>
+
+    window.onload = () => {
+        // On va chercher toutes les étoiles
+        const stars = document.querySelectorAll(".la-star");
+
+        // On va chercher l'input
+        const note = document.querySelector("#note");
+
+        // On boucle sur les étoiles pour le ajouter des écouteurs d'évènements
+        for(star of stars){
+            // On écoute le survol
+            star.addEventListener("mouseover", function(){
+                resetStars();
+                this.style.color = "red";
+                this.classList.add("las");
+                this.classList.remove("lar");
+                // L'élément précédent dans le DOM (de même niveau, balise soeur)
+                let previousStar = this.previousElementSibling;
+
+                while(previousStar){
+                    // On passe l'étoile qui précède en rouge
+                    previousStar.style.color = "red";
+                    previousStar.classList.add("las");
+                    previousStar.classList.remove("lar");
+                    // On récupère l'étoile qui la précède
+                    previousStar = previousStar.previousElementSibling;
+                }
+            });
+
+            // On écoute le clic
+            star.addEventListener("click", function(){
+                note.value = this.dataset.value;
+            });
+
+            star.addEventListener("mouseout", function(){
+                resetStars(note.value);
+            });
+        }
+
+        /**
+         * Reset des étoiles en vérifiant la note dans l'input caché
+         * @param {number} note
+         */
+        function resetStars(note = 0){
+            for(star of stars){
+                if(star.dataset.value > note){
+                    star.style.color = "black";
+                    star.classList.add("lar");
+                    star.classList.remove("las");
+                }else{
+                    star.style.color = "red";
+                    star.classList.add("las");
+                    star.classList.remove("lar");
+                }
+            }
+        }
+    }
+</script>
+{% endblock %}

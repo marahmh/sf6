@@ -1,0 +1,35 @@
+{% extends 'base_back.html.twig' %}
+
+{% block title %}TypeEvenement index{% endblock %}
+
+{% block body %}
+    <h1>TypeEvenement index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdTypeEvenement</th>
+                <th>LibelleTypeEvenement</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for type_evenement in type_evenements %}
+            <tr>
+                <td>{{ type_evenement.idTypeEvenement }}</td>
+                <td>{{ type_evenement.libelleTypeEvenement }}</td>
+                <td>
+                    <a href="{{ path('app_type_evenement_show', {'idTypeEvenement': type_evenement.idTypeEvenement}) }}">show</a>
+                    <a href="{{ path('app_type_evenement_edit', {'idTypeEvenement': type_evenement.idTypeEvenement}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_type_evenement_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'base_back.html.twig' %}
+
+{% block title %}Livre index{% endblock %}
+
+{% block body %}
+    <h1>Livre index</h1>
+    <div>
+        <button class="btn"> <a class="nav-link" href="/categorie/livre" > Categorie</a> </button>
+        <button class="btn"> <a class="nav-link" href="/achat/livre" > achat</a> </button>
+        <button class="btn"> <a class="nav-link" href="/commentaire/livre" > Commentaire</a> </button>
+        <button class="btn"> <a class="nav-link" href="/stat" > Statistique</a> </button>
+
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdLivre</th>
+                <th>TitreLivre</th>
+                <th>DescriptionLivre</th>
+                <th>DatePublicationLivre</th>
+                <th>PhotoLivre</th>
+                <th>ContenuLivre</th>
+                <th>PrixLivre</th>
+                <th>EvalutionLivre</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for livre in livres %}
+            <tr>
+                <td>{{ livre.idLivre }}</td>
+                <td>{{ livre.titreLivre }}</td>
+                <td>{{ livre.descriptionLivre }}</td>
+                <td>{{ livre.datePublicationLivre ? livre.datePublicationLivre|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ livre.photoLivre }}</td>
+                <td>{{ livre.contenuLivre }}</td>
+                <td>{{ livre.prixLivre }}</td>
+                <td>{{ livre.evalutionLivre }}</td>
+                <td>
+                    <a href="{{ path('app_livre_show', {'idLivre': livre.idLivre}) }}">show</a>
+                    <a href="{{ path('app_livre_edit', {'idLivre': livre.idLivre}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_livre_new') }}">Create new</a>
+{% endblock %}

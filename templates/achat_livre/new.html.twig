@@ -1,0 +1,11 @@
+{% extends 'base_back.html.twig' %}
+
+{% block title %}New AchatLivre{% endblock %}
+
+{% block body %}
+    <h1>Create new AchatLivre</h1>
+
+    {{ include('achat_livre/_form.html.twig') }}
+
+    <a href="{{ path('app_achat_livre_index') }}">back to list</a>
+{% endblock %}

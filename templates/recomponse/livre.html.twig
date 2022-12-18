@@ -1,0 +1,25 @@
+
+{% for recomponse in recomponses %}
+    <div class="col-md-4">
+    <div class="card mt-3" style="width: 15rem; text-align: center;background-color:transparent;">
+        <div class="product-1 align-items-center p-2 text-center" style="margin: 10px;"> <img src={{ asset('uploads/' ~ recomponse.idRecomponse.photoRecomponse ) }} class="rounded" width="160">
+            <h5>{{ recomponse.idRecomponse.nomRecomponse }}</h5>
+            <div class="mt-3 info"> <span class="text1 d-block">{{ recomponse.idRecomponse.descriptionRecomponse }}</span>
+                <div class=" cost mt-3 text-dark"> <span>Quantite {{ recomponse.quantite }}</span>
+                    <div class=" star mt-3 align-items-center"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> </div>
+                </div>
+            </div>
+            <div class="p-3 bg-danger text-center text-white mt-3 cursor"> </div>
+        </div>
+    </div>
+    </div>
+
+
+
+
+
+
+
+
+
+{% endfor %}

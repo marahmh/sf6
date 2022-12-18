@@ -1,0 +1,67 @@
+
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+    <link rel="stylesheet" href="{{ asset('frontOffice/assets/css/login.css')}}">
+    <link href="{{asset('frontOffice/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+
+
+    <div class="limiter" style="background-image: url({{ asset('frontOffice/assets/images/loginBackground.png')}});">
+        <div class="container-login100" >
+            <div class="wrap-login100" style="height: 70%">
+
+                <div  class="login100-form" >
+
+                    {{ form_start(form,{attr:{novalidate:'novalidate'}}) }}
+                    <div class="login100-form-title" style="margin-top: 10%;"></div>
+                    {% include 'flash_messages.html.twig' %}
+                        <div class="inputgap">
+                            {{ form_errors(form.nom_utilisateur, { 'attr': {'class': 'inputgap'} }) }}
+                        </div>
+                        {{ form_widget(form.nom_utilisateur, {  'attr': {'placeholder': 'Nom et prénom','class': '','novalidate': 'novalidate' } }) }}
+
+                    <div style="margin-bottom: 5%">
+                        <span style="color: #81523B;font-weight: bold;margin-top: 0%">Date de naissance: </span> {{ form_widget(form.date_naissance_utilisateur) }}
+                    </div>
+                    <div class="inputgap">
+                        {{ form_errors(form.photo_utilisateur) }}
+                    </div>
+                    {{ form_widget(form.photo_utilisateur, { 'attr': {'placeholder': 'Photo de profil','class': 'input100'} }) }}
+
+                    <div class="inputgap" style="2%">
+                        {{ form_errors(form.email_login) }}
+                    </div>
+                    {{ form_widget(form.email_login, { 'attr': {'placeholder': 'Email','class': 'input100'} }) }}
+
+                    <div class="inputgap">
+                        {{ form_errors(form.numero_utilisateur) }}
+                    </div>
+                    {{ form_widget(form.numero_utilisateur, { 'attr': {'placeholder': 'Numero telephone','class': 'input100'} }) }}
+
+                    <div class="inputgap">
+                        {{ form_errors(form.typeUtilisateur) }}
+                    </div>
+                    {{ form_widget(form.typeUtilisateur, { 'attr': {'class': 'input100'} }) }}
+
+                    <div class="inputgap">
+                        {{ form_errors(form.mdp_login) }}
+                    </div>
+                    {{ form_widget(form.mdp_login, { 'attr': {'placeholder': 'Mot de passe','class': 'input100'} }) }}
+
+                    <div class="inputgap">
+                        {{ form_errors(form.confirme_mot_de_passe) }}
+                    </div>
+                    {{ form_widget(form.confirme_mot_de_passe, { 'attr': {'placeholder': 'Confirmer mot de passe','class': 'input100'} }) }}
+                    {{ form_widget(form.captcha,{'arrt':{'class':'inline'}})}}
+<button class="btn loginButton">{{ button_label|default('Save') }}</button>
+                    {{ form_end(form) }}
+                </div>
+
+                <div class="login100-more" style="background-image: url({{ asset('frontOffice/assets/images/loginBooks1.jpg')}});"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

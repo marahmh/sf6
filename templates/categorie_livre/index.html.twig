@@ -1,0 +1,35 @@
+{% extends 'base_back.html.twig' %}
+
+{% block title %}CategorieLivre index{% endblock %}
+
+{% block body %}
+    <h1>CategorieLivre index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdCategorieLivre</th>
+                <th>Libelle</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for categorie_livre in categorie_livres %}
+            <tr>
+                <td>{{ categorie_livre.idCategorieLivre }}</td>
+                <td>{{ categorie_livre.libelle }}</td>
+                <td>
+                    <a href="{{ path('app_categorie_livre_show', {'idCategorieLivre': categorie_livre.idCategorieLivre}) }}">show</a>
+                    <a href="{{ path('app_categorie_livre_edit', {'idCategorieLivre': categorie_livre.idCategorieLivre}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_categorie_livre_new') }}">Create new</a>
+{% endblock %}

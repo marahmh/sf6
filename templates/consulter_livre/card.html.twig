@@ -1,0 +1,16 @@
+{% for livre in livres %}
+    <div class="col-sm-4">
+        <div class="product-item">
+            <a href="#"><img src={{ asset("uploads/livre/"~livre.photoLivre) }} alt=""></a>
+            <div class="down-content">
+                <a><h4>{{livre.titreLivre}}</h4></a>
+                <h6>Prix : {{livre.prixLivre}}</h6>
+                <p>{{livre.descriptionLivre}}</p>
+                <a style="margin-left: 34%" href="{{ path('app_consulter_livre-consultation', {'idLivre': livre.idLivre}) }}" class="btnEventAccueil">Suite...</a>
+
+
+
+            </div>
+        </div>
+    </div>
+{% endfor %}

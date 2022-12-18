@@ -1,0 +1,28 @@
+{% extends 'base_front.html.twig' %}
+
+{% block title %}showMaison index{% endblock %}
+
+{% block body %}
+
+<h1>showMaison index</h1>
+    <div style="margin-bottom: 100px"></div>
+    <div class="container">
+        <div class="row">
+    {% for m in maison %}
+
+<div class="col-md-4">
+    <div class="product-item">
+        <a href="#"><img src={{ asset("frontOffice/assets/images/product_01.jpg") }} alt=""></a>
+        <div class="down-content">
+            <a href="#"><h4>{{  m.nomMaisonEdition}}</h4></a>
+            <h6>{{ m.adresseMaisonEdition }}</h6>
+            <p>{{  m.descriptionMaisonEdition}}</p>
+            <a href="{{ path('app_masion_edition_show2', {'idMaisonEdition': m.idMaisonEdition}) }}">show</a>
+            <span>Participants (24)</span>
+        </div>
+    </div>
+</div>
+    {% endfor %}
+</div>
+    </div>
+{% endblock %}

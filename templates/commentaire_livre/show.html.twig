@@ -1,0 +1,30 @@
+{% extends 'base_back.html.twig' %}
+
+{% block title %}CommentaireLivre{% endblock %}
+
+{% block body %}
+    <h1>CommentaireLivre</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>IdCommentaire</th>
+                <td>{{ commentaire_livre.idCommentaire }}</td>
+            </tr>
+            <tr>
+                <th>ContenuCommentaire</th>
+                <td>{{ commentaire_livre.contenuCommentaire }}</td>
+            </tr>
+            <tr>
+                <th>DateCommentaire</th>
+                <td>{{ commentaire_livre.dateCommentaire ? commentaire_livre.dateCommentaire|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_commentaire_livre_index') }}">back to list</a>
+
+    <a href="{{ path('app_commentaire_livre_edit', {'idCommentaire': commentaire_livre.idCommentaire}) }}">edit</a>
+
+    {{ include('commentaire_livre/_delete_form.html.twig') }}
+{% endblock %}

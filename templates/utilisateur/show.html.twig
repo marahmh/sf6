@@ -1,0 +1,46 @@
+{% extends 'base_back.html.twig' %}
+
+{% block title %}Utilisateur{% endblock %}
+
+{% block body %}
+    <h1 >Utilisateur</h1>
+    <div style="margin-bottom: 100px"></div>
+    <table class="table" >
+        <tbody>
+            <tr>
+                <th>IdUtilisateur</th>
+                <td>{{ utilisateur.idUtilisateur }}</td>
+            </tr>
+            <tr>
+                <th>NomUtilisateur</th>
+                <td>{{ utilisateur.nomUtilisateur }}</td>
+            </tr>
+            <tr>
+                <th>DateNaissanceUtilisateur</th>
+                <td>{{ utilisateur.dateNaissanceUtilisateur ? utilisateur.dateNaissanceUtilisateur|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>PhotoUtilisateur</th>
+                <td>{{ utilisateur.photoUtilisateur }}</td>
+            </tr>
+            <tr>
+                <th>TypeUtilisateur</th>
+                <td>{{ utilisateur.typeUtilisateur }}</td>
+            </tr>
+            <tr>
+                <th>SoldeUtilisateur</th>
+                <td>{{ utilisateur.soldeUtilisateur }}</td>
+            </tr>
+            <tr>
+                <th>EmailUtilisateur</th>
+                <td>{{ utilisateur.emailUtilisateur }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_utilisateur_index') }}">back to list</a>
+
+    <a href="{{ path('app_utilisateur_edit', {'idUtilisateur': utilisateur.idUtilisateur}) }}">edit</a>
+
+    {{ include('utilisateur/_delete_form.html.twig') }}
+{% endblock %}

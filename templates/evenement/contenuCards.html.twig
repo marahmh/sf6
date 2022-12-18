@@ -1,0 +1,30 @@
+ {% for evenement in evenements %}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="product-item">
+                    {% if evenement.image is not  null %}
+                        <a href="#"><img src={{ asset("/uploads/"~ evenement.image ) }} alt=""></a>
+                    {%else %}
+                        <a href="#"><img src={{ asset("frontOffice/assets/images/child-page-placeholder.png") }} alt=""></a>
+                    {% endif %}
+                    <div class="down-content">
+                        <a href="#"><h4>{{ evenement.titreEvenement }}</h4></a>
+
+                        <p>{{ evenement.descriptionEvenement }}</p>
+                        {% if  app.user %}
+                            {%if  evenement.estParticipe ==1 %}
+                                <a class="btnEventAccueil">Deja Participant </a>
+                            {% else %}
+                                <a href="{{ path('app_evenement_participer', {'idEvenement': evenement.idEvenement}) }}" class="btnEventAccueil">Participer</a>
+                            {% endif %}
+                        {% endif %}
+                        &nbsp;
+                        <a href="{{ path('app_detailEvenement', {'idEvenement': evenement.idEvenement}) }}"  class="btnEventAccueil">Voir plus</a>
+
+                        <span>Participants ({{ evenement.nbParticipant }})</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+

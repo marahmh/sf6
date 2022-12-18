@@ -1,0 +1,12 @@
+{%block body %}
+<div id="map" style="height: 500px"></div>
+
+
+
+{% endblock %}
+{% block javascript %}
+<script src= "{{ asset('js/mapScripts.js') }}" ></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBouHoRUF8Z3qv6xNAheHDFW2QQJHBx-Qs&callback=initialize"
+      defer
+    ></script>
+{% endblock %}

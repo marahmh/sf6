@@ -1,0 +1,22 @@
+{% extends 'base_back.html.twig' %}
+
+{% block title %}New Evenement{% endblock %}
+
+{% block body %}
+    <div class="container">
+    <h1>Ajouter un evenement</h1>
+    <div style="margin-bottom: 100px"></div>
+        {{ form_start(form,{attr:{novalidate:'novalidate'}}) }}
+        {{ form_widget(form.titreEvenement )}}
+       
+        {{ form_widget(form.adresseEvenement,{'attr':{'class':'adresse'}}) }}
+        {{ form_widget(form.longitude,{'attr':{'class':'long'}}) }}
+        {{ form_widget(form.Latitude,{'attr':{'class':'lat'}}) }}
+
+        {{ include('evenement/map.html.twig') }}
+        <button class="btn">{{ button_label|default('Save') }}</button>
+        {{ form_end(form) }}
+
+    <a href="{{ path('app_evenement_index') }}">back to list</a>
+    </div>
+{% endblock %}
